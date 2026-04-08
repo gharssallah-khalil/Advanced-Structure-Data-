@@ -1,0 +1,115 @@
+Sample outputs for required tasks
+Generated from: data/dataset_small.csv (3,000 records, seed 7202)
+
+================================================================================
+
+>>> python main.py --build data/dataset_small.csv
+
+Dataset: data/dataset_small.csv
+Records: 3000
+Unique IDs: 3000
+Validation complete.
+
+================================================================================
+
+>>> python main.py --dataset data/dataset_small.csv --lookup 1000100
+
+Linear scan result:
+{"record_id": 1000100, "name": "Asli Yaman", "category": "toys", "region": "Central Anatolia", "year": 2023, "score": 68, "value": 3752}
+Linear lookup time: 0.011100 ms
+
+Dictionary-based result:
+{"record_id": 1000100, "name": "Asli Yaman", "category": "toys", "region": "Central Anatolia", "year": 2023, "score": 68, "value": 3752}
+Dictionary lookup time: 0.001600 ms
+
+================================================================================
+
+>>> python main.py --dataset data/dataset_small.csv --freq category
+
+Frequency count for field 'category':
+sports: 460
+fashion: 447
+electronics: 428
+grocery: 424
+books: 422
+toys: 416
+home: 403
+
+================================================================================
+
+>>> python main.py --dataset data/dataset_small.csv --duplicates
+
+Duplicate rule: duplicate (name, year)
+Duplicate groups: 901
+Records in duplicate groups: 2459
+Sample groups:
+1. (Asli Aksoy, 2018) -> 4 records, IDs sample: [1000595, 1000963, 1002116, 1002475]
+2. (Asli Aksoy, 2019) -> 2 records, IDs sample: [1000593, 1001407]
+3. (Asli Aksoy, 2020) -> 5 records, IDs sample: [1000153, 1000761, 1000987, 1001402, 1002942]
+4. (Asli Aksoy, 2024) -> 2 records, IDs sample: [1001716, 1001773]
+5. (Asli Arslan, 2018) -> 3 records, IDs sample: [1001676, 1002217, 1002570]
+6. (Asli Arslan, 2019) -> 4 records, IDs sample: [1000207, 1000402, 1001139, 1001805]
+7. (Asli Arslan, 2023) -> 3 records, IDs sample: [1000225, 1000753, 1001211]
+8. (Asli Arslan, 2024) -> 2 records, IDs sample: [1001274, 1002700]
+9. (Asli Aydin, 2018) -> 2 records, IDs sample: [1000233, 1001446]
+10. (Asli Aydin, 2021) -> 3 records, IDs sample: [1000161, 1000504, 1001242]
+
+================================================================================
+
+>>> python main.py --dataset data/dataset_small.csv --topk 10
+
+Top-10 by score (sorting-based):
+Count: 10
+{"record_id": 1000258, "name": "Emre Celik", "category": "toys", "region": "Southeast", "year": 2021, "score": 100, "value": 3075}
+{"record_id": 1000274, "name": "Deniz Kaya", "category": "fashion", "region": "Black Sea", "year": 2025, "score": 100, "value": 1360}
+{"record_id": 1000366, "name": "Can Yilmaz", "category": "home", "region": "Marmara", "year": 2021, "score": 100, "value": 3529}
+{"record_id": 1000503, "name": "Ayse Aydin", "category": "sports", "region": "Central Anatolia", "year": 2020, "score": 100, "value": 2755}
+{"record_id": 1000539, "name": "Burak Aksoy", "category": "electronics", "region": "Black Sea", "year": 2018, "score": 100, "value": 2078}
+{"record_id": 1000657, "name": "Deniz Yilmaz", "category": "books", "region": "Southeast", "year": 2018, "score": 100, "value": 1081}
+{"record_id": 1000659, "name": "Zeynep Yaman", "category": "home", "region": "Mediterranean", "year": 2019, "score": 100, "value": 2055}
+{"record_id": 1000684, "name": "Derya Aksoy", "category": "fashion", "region": "Southeast", "year": 2022, "score": 100, "value": 1600}
+{"record_id": 1000685, "name": "Yigit Tekin", "category": "books", "region": "Southeast", "year": 2020, "score": 100, "value": 972}
+{"record_id": 1000828, "name": "Seda Tekin", "category": "sports", "region": "Southeast", "year": 2018, "score": 100, "value": 2891}
+Sorting-based time: 1.222600 ms
+
+Top-10 by score (heap-based):
+Count: 10
+{"record_id": 1000258, "name": "Emre Celik", "category": "toys", "region": "Southeast", "year": 2021, "score": 100, "value": 3075}
+{"record_id": 1000274, "name": "Deniz Kaya", "category": "fashion", "region": "Black Sea", "year": 2025, "score": 100, "value": 1360}
+{"record_id": 1000366, "name": "Can Yilmaz", "category": "home", "region": "Marmara", "year": 2021, "score": 100, "value": 3529}
+{"record_id": 1000503, "name": "Ayse Aydin", "category": "sports", "region": "Central Anatolia", "year": 2020, "score": 100, "value": 2755}
+{"record_id": 1000539, "name": "Burak Aksoy", "category": "electronics", "region": "Black Sea", "year": 2018, "score": 100, "value": 2078}
+{"record_id": 1000657, "name": "Deniz Yilmaz", "category": "books", "region": "Southeast", "year": 2018, "score": 100, "value": 1081}
+{"record_id": 1000659, "name": "Zeynep Yaman", "category": "home", "region": "Mediterranean", "year": 2019, "score": 100, "value": 2055}
+{"record_id": 1000684, "name": "Derya Aksoy", "category": "fashion", "region": "Southeast", "year": 2022, "score": 100, "value": 1600}
+{"record_id": 1000685, "name": "Yigit Tekin", "category": "books", "region": "Southeast", "year": 2020, "score": 100, "value": 972}
+{"record_id": 1000828, "name": "Seda Tekin", "category": "sports", "region": "Southeast", "year": 2018, "score": 100, "value": 2891}
+Heap-based time: 0.713500 ms
+Methods produce identical record_id ordering: True
+
+================================================================================
+
+>>> python main.py --dataset data/dataset_small.csv --range value 1000 2000
+
+Range query: 1000 <= value <= 2000
+Linear scan count: 689
+Linear scan time: 0.323000 ms
+Sorted-index build time: 1.412700 ms
+Binary-search query count: 689
+Binary-search query time: 0.005200 ms
+Binary-search total (build + query): 1.417900 ms
+Methods return identical record set: True
+
+Sample output:
+Count: 689
+{"record_id": 1001597, "name": "Ayse Kurt", "category": "electronics", "region": "Aegean", "year": 2024, "score": 64, "value": 1000}
+{"record_id": 1001177, "name": "Seda Sahin", "category": "fashion", "region": "Southeast", "year": 2025, "score": 77, "value": 1001}
+{"record_id": 1000321, "name": "Burak Arslan", "category": "home", "region": "Aegean", "year": 2018, "score": 93, "value": 1003}
+{"record_id": 1002149, "name": "Derya Kaya", "category": "grocery", "region": "Central Anatolia", "year": 2024, "score": 58, "value": 1004}
+{"record_id": 1001464, "name": "Deniz Tekin", "category": "grocery", "region": "Aegean", "year": 2023, "score": 59, "value": 1008}
+{"record_id": 1000781, "name": "Seda Gunes", "category": "electronics", "region": "Central Anatolia", "year": 2025, "score": 99, "value": 1012}
+{"record_id": 1001971, "name": "Irem Aksoy", "category": "electronics", "region": "Southeast", "year": 2019, "score": 45, "value": 1012}
+{"record_id": 1002667, "name": "Mert Aydin", "category": "fashion", "region": "Southeast", "year": 2025, "score": 68, "value": 1015}
+{"record_id": 1002049, "name": "Ayse Aydin", "category": "toys", "region": "Southeast", "year": 2024, "score": 80, "value": 1017}
+{"record_id": 1000757, "name": "Zeynep Yilmaz", "category": "electronics", "region": "Black Sea", "year": 2025, "score": 56, "value": 1018}
+... (679 more records)

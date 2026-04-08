@@ -1,0 +1,10 @@
+experiment,method,parameter,runs,total_time_ms,avg_time_ms,stddev_ms,notes
+A_ID_lookup,linear_scan,1000_lookups,1000,2565.579700,2.565580,1.742863,Lookup by record_id with sequential scan.
+A_ID_lookup,dict_index,1000_lookups,1000,0.549300,0.000549,0.000706,Lookup by record_id using hash map.
+B_top_k,sorting,k=10,30,1422.144000,47.404800,6.118446,Sort entire dataset by score descending.
+B_top_k,heap,k=10,30,473.078800,15.769293,1.207451,heapq.nlargest top-k. same_result=True
+B_top_k,sorting,k=100,30,1458.108100,48.603603,7.939699,Sort entire dataset by score descending.
+B_top_k,heap,k=100,30,461.419000,15.380633,0.975384,heapq.nlargest top-k. same_result=True
+C_range_query,linear_scan,"value,500_queries",500,5855.587401,11.711175,1.985593,Range filter by value with full scan.
+C_range_query,sorted_index_build,build_index_value,1,103.611400,103.611400,0.000000,One-time preprocessing sort cost (add to binary_search total for fair comparison).
+C_range_query,binary_search,"value,500_queries",500,119.624300,0.239249,0.274657,Bisect on sorted value. validated=True. Total with build=223.24 ms

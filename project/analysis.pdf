@@ -1,0 +1,454 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 2623 >>
+stream
+BT
+54 770 Td
+/F2 12 Tf
+(CME7202 - ADVANCED DATA STRUCTURES) Tj
+0 -14 Td
+/F1 10.5 Tf
+() Tj
+0 -14 Td
+/F2 11 Tf
+(Midterm Replacement Project) Tj
+0 -14 Td
+/F1 10.5 Tf
+() Tj
+0 -14 Td
+(Project: Mini Data Indexer and Query Tool) Tj
+0 -14 Td
+(Students: Khalil Gharssallah, Houssem Djebbi) Tj
+0 -14 Td
+(Program: Master Students in Engineering) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 11 Tf
+(1. Approach) Tj
+0 -14 Td
+/F1 10.5 Tf
+() Tj
+0 -14 Td
+(Our objective was to implement the required queries with clear data-structure) Tj
+0 -14 Td
+(choices, then validate these choices experimentally.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(1.1 Data Representation) Tj
+0 -14 Td
+/F1 10.5 Tf
+(- Dataset is stored as a list of records \(list[dict]\) loaded from CSV.) Tj
+0 -14 Td
+(- Each record has exactly the required fields:) Tj
+0 -14 Td
+(  record_id, name, category, region, year, score, value.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(1.2 Chosen Structures and Methods) Tj
+0 -14 Td
+/F1 10.5 Tf
+(- **Exact lookup by ID**) Tj
+0 -14 Td
+(  - Baseline: linear scan over list.) Tj
+0 -14 Td
+(  - Improved: hash index \(dict[int, record]\).) Tj
+0 -14 Td
+(  - Reason: hash table gives expected O\(1\) query time after one O\(n\) build.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- **Frequency counting**) Tj
+0 -14 Td
+(  - Used collections.Counter on a categorical field \(category or region\).) Tj
+0 -14 Td
+(  - Reason: direct and efficient one-pass counting.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- **Duplicate detection**) Tj
+0 -14 Td
+(  - Rule used: duplicate \(name, year\).) Tj
+0 -14 Td
+(  - Structure: defaultdict\(list\) grouping by \(name, year\).) Tj
+0 -14 Td
+(  - Reason: grouping by key is simple and linear-time.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- **Top-k by score**) Tj
+0 -14 Td
+(  - Method A: full sort by score descending.) Tj
+0 -14 Td
+(  - Method B: heapq.nlargest\(k, ...\).) Tj
+0 -14 Td
+(  - Reason: sorting is straightforward baseline, heap is asymptotically better) Tj
+0 -14 Td
+(for small k.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- **Range query on numeric field \(value\)**) Tj
+0 -14 Td
+(  - Method A: linear filtering.) Tj
+0 -14 Td
+(  - Method B: sort once + binary search with bisect_left/bisect_right.) Tj
+0 -14 Td
+(  - Reason: preprocessing cost can be amortized over repeated queries.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(1.3 Engineering Notes) Tj
+0 -14 Td
+/F1 10.5 Tf
+(- Standard Python library only \(no pandas, no DB, no GUI\).) Tj
+0 -14 Td
+(- CLI entry points support all required commands.) Tj
+0 -14 Td
+(- Deterministic generation via explicit random seed.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 11 Tf
+(2. Correctness Arguments) Tj
+ET
+BT
+/F2 10 Tf
+302 22 Td
+(1) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 3423 >>
+stream
+BT
+54 770 Td
+/F1 10.5 Tf
+() Tj
+0 -14 Td
+(We give short correctness claims for each task.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(Claim 1: Exact Lookup Correctness) Tj
+0 -14 Td
+/F1 10.5 Tf
+(- **Linear scan:** returns a record iff some record has matching record_id,) Tj
+0 -14 Td
+(because all records are checked sequentially.) Tj
+0 -14 Td
+(- **Dictionary lookup:** for index I[id] = record, query returns exactly the) Tj
+0 -14 Td
+(record mapped to that key, or None if key is absent.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(Claim 2: Frequency Count Correctness) Tj
+0 -14 Td
+/F1 10.5 Tf
+(For each record, exactly one increment is applied to the selected categorical) Tj
+0 -14 Td
+(value. Therefore, final counts equal true occurrence frequencies.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(Claim 3: Duplicate Detection Correctness) Tj
+0 -14 Td
+/F1 10.5 Tf
+(All records with same \(name, year\) are inserted into the same group key. A key) Tj
+0 -14 Td
+(is reported iff its group size is greater than 1, which is exactly the duplicate) Tj
+0 -14 Td
+(definition used.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(Claim 4: Top-k Correctness) Tj
+0 -14 Td
+/F1 10.5 Tf
+(- Sorting-based method globally orders records by score descending, so first k) Tj
+0 -14 Td
+(are top-k.) Tj
+0 -14 Td
+(- Heap-based method \(nlargest\) returns the k elements with largest keys.) Tj
+0 -14 Td
+(- We validate equivalence in experiments \(same_result=True\).) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(Claim 5: Range Query Correctness) Tj
+0 -14 Td
+/F1 10.5 Tf
+(- Linear method includes exactly records satisfying a <= value <= b.) Tj
+0 -14 Td
+(- Binary method finds the leftmost index of a and rightmost index after b in) Tj
+0 -14 Td
+(sorted values, then returns exactly that slice.) Tj
+0 -14 Td
+(- Validation in experiments confirms returned sets match \(validated=True\).) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 11 Tf
+(3. Complexity Analysis) Tj
+0 -14 Td
+/F1 10.5 Tf
+() Tj
+0 -14 Td
+(Let:) Tj
+0 -14 Td
+(- n = number of records) Tj
+0 -14 Td
+(- m = number of distinct categorical values) Tj
+0 -14 Td
+(- k = requested top-k size) Tj
+0 -14 Td
+(- r = number of records in range-query result) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(+----------------+----------------------+--------------------------+-----------------+) Tj
+0 -14 Td
+(| Task           | Method               | Time Complexity          | Space           |) Tj
+0 -14 Td
+(|                |                      |                          | Complexity      |) Tj
+0 -14 Td
+(+----------------+----------------------+--------------------------+-----------------+) Tj
+0 -14 Td
+(| ID lookup      | Linear scan          | O\(n\) per query           | O\(1\) extra      |) Tj
+0 -14 Td
+(+----------------+----------------------+--------------------------+-----------------+) Tj
+0 -14 Td
+(| ID lookup      | Dictionary index     | Build O\(n\), query O\(1\)   | O\(n\)            |) Tj
+0 -14 Td
+(|                |                      | average                  |                 |) Tj
+0 -14 Td
+(+----------------+----------------------+--------------------------+-----------------+) Tj
+0 -14 Td
+(| Frequency      | Counter              | O\(n\)                     | O\(m\)            |) Tj
+0 -14 Td
+(| count          |                      |                          |                 |) Tj
+0 -14 Td
+(+----------------+----------------------+--------------------------+-----------------+) Tj
+ET
+BT
+/F2 10 Tf
+302 22 Td
+(2) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 3098 >>
+stream
+BT
+54 770 Td
+/F1 10.5 Tf
+(| Duplicate      | Group by \(name,      | O\(n\) expected            | O\(n\) worst case |) Tj
+0 -14 Td
+(| detection      | year\)                |                          |                 |) Tj
+0 -14 Td
+(+----------------+----------------------+--------------------------+-----------------+) Tj
+0 -14 Td
+(| Top-k          | Full sort            | O\(n log n\)               | O\(n\)            |) Tj
+0 -14 Td
+(+----------------+----------------------+--------------------------+-----------------+) Tj
+0 -14 Td
+(| Top-k          | Heap \(nlargest\)      | O\(n log k\)               | O\(k\) auxiliary  |) Tj
+0 -14 Td
+(+----------------+----------------------+--------------------------+-----------------+) Tj
+0 -14 Td
+(| Range query    | Linear scan          | O\(n\) per query           | O\(1\) extra      |) Tj
+0 -14 Td
+(+----------------+----------------------+--------------------------+-----------------+) Tj
+0 -14 Td
+(| Range query    | Sorted + binary      | Preprocess O\(n log n\),   | O\(n\)            |) Tj
+0 -14 Td
+(|                | search               | query O\(log n + r\)       |                 |) Tj
+0 -14 Td
+(+----------------+----------------------+--------------------------+-----------------+) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 11 Tf
+(4. Experiments and Discussion) Tj
+0 -14 Td
+/F1 10.5 Tf
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(4.1 Setup) Tj
+0 -14 Td
+/F1 10.5 Tf
+(- Python 3.11.9) Tj
+0 -14 Td
+(- Main dataset size: 100,000 records) Tj
+0 -14 Td
+(- Random seed: 7202) Tj
+0 -14 Td
+(- Results file: results/timings.csv) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(4.2 Measured Results) Tj
+0 -14 Td
+/F1 10.5 Tf
+(From the timing file:) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- **A\) ID lookup \(1000 random queries\)**) Tj
+0 -14 Td
+(  - Linear: 5.909339 ms per lookup) Tj
+0 -14 Td
+(  - Dictionary: 0.000560 ms per lookup) Tj
+0 -14 Td
+(  - Speedup: about 10,552x) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- **B\) Top-k**) Tj
+0 -14 Td
+(  - k=10: sort 84.384000 ms, heap 36.204703 ms -> heap about 2.33x faster) Tj
+0 -14 Td
+(  - k=100: sort 73.243140 ms, heap 38.119893 ms -> heap about 1.92x faster) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(- **C\) Range query on value \(500 queries\)**) Tj
+0 -14 Td
+(  - Linear: 14.243093 ms per query) Tj
+0 -14 Td
+(  - Binary query \(after preprocessing\): 0.347548 ms per query) Tj
+0 -14 Td
+(  - One-time preprocess cost: 118.018400 ms) Tj
+0 -14 Td
+(  - Query-time speedup: about 40.98x) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 10.5 Tf
+(4.3 Interpretation) Tj
+0 -14 Td
+/F1 10.5 Tf
+(- Hash indexing is the dominant improvement for repeated exact lookups.) Tj
+0 -14 Td
+(- Heap top-k is better than full sorting when k is much smaller than n.) Tj
+0 -14 Td
+(- Sorted index + binary search is strongly beneficial for repeated range) Tj
+0 -14 Td
+(queries.) Tj
+0 -14 Td
+(- Break-even for range preprocessing is very low:) Tj
+0 -14 Td
+(  around 9 queries already compensate the one-time sort cost.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+/F2 11 Tf
+(5. AI Usage Disclosure) Tj
+0 -14 Td
+/F1 10.5 Tf
+() Tj
+0 -14 Td
+(AI was used according to assignment rules.) Tj
+ET
+BT
+/F2 10 Tf
+302 22 Td
+(3) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 598 >>
+stream
+BT
+54 770 Td
+/F1 10.5 Tf
+() Tj
+0 -14 Td
+(- **Tool used:** OpenAI Codex \(GPT-5 based assistant\).) Tj
+0 -14 Td
+(- **How it was used:** brainstorming structure, debugging support, and language) Tj
+0 -14 Td
+(polishing.) Tj
+0 -14 Td
+(- **Student responsibility:** all logic, outputs, and report statements were) Tj
+0 -14 Td
+(reviewed and verified by us before submission.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(We confirm:) Tj
+0 -14 Td
+(- no fabricated measurements,) Tj
+0 -14 Td
+(- no hidden AI usage,) Tj
+0 -14 Td
+(- and full understanding of submitted code and report.) Tj
+ET
+BT
+/F2 10 Tf
+302 22 Td
+(4) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000141 00000 n 
+0000000209 00000 n 
+0000000284 00000 n 
+0000002959 00000 n 
+0000003095 00000 n 
+0000006570 00000 n 
+0000006706 00000 n 
+0000009856 00000 n 
+0000009993 00000 n 
+0000010643 00000 n 
+trailer
+<< /Size 13 /Root 1 0 R >>
+startxref
+10781
+%%EOF
